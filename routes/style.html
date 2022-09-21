@@ -1,0 +1,182 @@
+---
+title: SaneJS Style Guide
+activeNav: style
+---
+
+<style lang="postcss">
+  section {
+    margin-bottom: 4rem;
+  }
+  .class-name {
+    display: inline-block;
+    background: var(--mark-background);
+    padding: 0.75rem 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .note {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  .swatch {
+    height: 10rem;
+    width: 10rem;
+    margin-right: 1.5rem;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 7px;
+    border-width: 3px;
+  }
+
+  .swatch .class-name {
+    margin: 0;
+    width: 100%;
+    background: white;
+    font-size: 0.8rem;
+  }
+</style>
+
+<div class="page">
+  <h1 class="text-slate-800 font-bold text-5xl">Style Guide</h1>
+  <p class="mb-12 text-xl">
+    Edit values in <code>/style/variables.css</code>. Watch this page to see live results.
+  </p>
+
+  <section>
+    <span class="class-name">.[selector]-[color]-[level]</span>
+  </section>
+  <section class="flex -mt-4">
+    <div class="swatch border-brand-1 bg-brand-1"><span class="class-name">.xxx-brand-1</span></div>
+    <div class="swatch border-brand-2 bg-brand-2"><span class="class-name">.xxx-brand-2</span></div>
+    <div class="swatch border-brand-3 bg-brand-3"><span class="class-name">.xxx-brand-3</span></div>
+  </section>
+  <section class="flex -mt-8">
+    <div class="swatch border-light-1 bg-light-1"><span class="class-name">.xxx-light-1</span></div>
+    <div class="swatch border-light-2 bg-light-2"><span class="class-name">.xxx-light-2</span></div>
+    <div class="swatch border-light-3 bg-light-3"><span class="class-name">.xxx-light-3</span></div>
+  </section>
+  <section class="flex -mt-8">
+    <div class="swatch border-dark-1 bg-dark-1"><span class="class-name">.xxx-dark-1</span></div>
+    <div class="swatch border-dark-2 bg-dark-2"><span class="class-name">.xxx-dark-2</span></div>
+    <div class="swatch border-dark-3 bg-dark-3"><span class="class-name">.xxx-dark-3</span></div>
+  </section>
+  <section class="flex -mt-8">
+    <div class="swatch border-info bg-info">
+      <span class="class-name">.xxx-info</span>
+    </div>
+    <div class="swatch border-success bg-success">
+      <span class="class-name">.xxx-success</span>
+    </div>
+    <div class="swatch border-warning bg-warning">
+      <span class="class-name">.xxx-warning</span>
+    </div>
+    <div class="swatch border-error bg-error">
+      <span class="class-name">.xxx-error</span>
+    </div>
+  </section>
+
+  <section>
+    <span class="class-name">.h1, .h2, .h3, .h4</span>
+    <h1 class="h1">Heading.h1</h1>
+    <h2 class="h2">Heading.h2</h2>
+    <h3 class="h3">Heading.h3</h3>
+    <h4 class="h4">Heading.h4</h4>
+  </section>
+  <section>
+    <span class="class-name">.text-xs</span>
+    <div class="text-xs">
+      Imagine a combination of IIS and J2EE. Is it more important for something to be best-of-breed?
+      The portals factor can be delivered as-a-service to wherever it’s intended to go – mobile.
+    </div>
+  </section>
+  <section>
+    <span class="class-name">.text-sm</span>
+    <div class="text-sm">
+      We believe we know that if you drive micro-mega-cyber-virally then you may also mesh
+      iteravely. If you transition globally, you may also reintermediate magnetically.
+    </div>
+  </section>
+  <section>
+    <span class="class-name">.text-base</span> (default)
+    <div class="text-base">
+      Without preplanned cyber-Total Quality Control, aggregation are forced to become cross-media?
+      We think that most C2C2C web-based applications use far too much XSL, and not enough PNG. We
+      apply the proverb 'Look before you leap' not only on our feature set, but our granular
+      integrated, value-added convergence and easy use is frequently considered a terrific
+      achievement.
+    </div>
+  </section>
+  <section>
+    <span class="class-name">.text-lg</span>
+    <div class="text-lg">
+      Without micro-resource-constrained performance, you will lack architectures. The capability to
+      implement wirelessly leads to the capacity to harness without devaluing our power to
+      syndicate. Our infinitely reconfigurable feature set is second to none, but our strategic
+      angel investors and user-proof use.
+    </div>
+  </section>
+  <section>
+    <span class="class-name">.text-xl</span>
+    <div class="text-xl">
+      Without interfaces, you will lack affiliate-based compliance. Without efficient, transparent
+      bloatware, you will lack affiliate-based compliance. Without niches, you will lack
+      experiences.
+    </div>
+  </section>
+
+  <section>
+    <span class="class-name">table</span>
+    <p class="note">Table elements inside <code>&lt;table&gt;</code></p>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bob</td>
+          <td>45</td>
+          <td>bob@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Dave</td>
+          <td>38</td>
+          <td>dave@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Sarah</td>
+          <td>26</td>
+          <td>sarah@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Orville</td>
+          <td>93</td>
+          <td>orville@gmail.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <span class="class-name">.ul</span>
+    <p class="note">List elements inside <code>&lt;ul&gt;</code></p>
+    <ul>
+      <li>2 pounds cat litter</li>
+      <li>1/2 Liter dumpster juice</li>
+      <li>2 hairballs</li>
+      <li>4 tablespoons pigeon droppings</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="class-name">.ol</span>
+    <p class="note">List elements inside <code>&lt;ol&gt;</code></p>
+    <ol>
+      <li>Wake up</li>
+      <li>Brush coffee</li>
+      <li>Fry the cat</li>
+      <li>Vacuum the lawn</li>
+    </ol>
+  </section>
+</div>

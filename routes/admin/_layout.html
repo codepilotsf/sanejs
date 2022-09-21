@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      h2 > a,
+      h2 > a:visited {
+        color: inherit;
+        font-weight: inherit;
+      }
+
+      form {
+        max-width: 30rem;
+      }
+    </style>
+    {> _/html-head }
+  </head>
+  <body class="admin" hx-boost="true">
+    <!-- Header -->
+    <header class="bg-dark-2 text-light-1">
+      <a href="/" hx-boost="false" class="p-4 -ml-4"> {> _/logo } </a>
+
+      <!-- Desktop nav -->
+      <nav class="desktop w-full flex justify-between" _="init add .active to .nav-{=activeNav}">
+        <a class="nav-users" href="/admin/users">Users</a>
+        <a href="/admin/logout" hx-boost="false" class="-mr-4">
+          <i class="iconify text-2xl" data-icon="mdi-logout"></i>
+        </a>
+      </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main class="mt-0">
+      { slot }
+      <footer>
+        <span class="flex items-center justify-center h-full text-xs"
+          >&copy; Copyright 2022 Nobody, Inc.</span
+        >
+      </footer>
+    </main>
+    <script>
+      // htmx.logAll();
+    </script>
+  </body>
+</html>

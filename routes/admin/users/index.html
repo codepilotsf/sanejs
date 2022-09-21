@@ -1,0 +1,35 @@
+---
+title: Admin - Users
+activeNav: users
+---
+
+<script server>
+  const User = require('~/models/User')
+
+  // GET /users
+  server.get('/', async (req, res) => {
+    const users = await User.find()
+    res.render(self, { users }, 'page')
+  })
+</script>
+
+<div id="page" class="page">
+  <div class="flex items-center justify-between">
+    <h2>USERS</h2>
+    <div><a role="button" href="/admin/users/new">Add New</a></div>
+  </div>
+  <table class="highlight-rows" hx-swap="none" hx-push-url="true">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th class="w-20">Admin</th>
+    </tr>
+    {@ users}
+    <tr hx-get="/admin/users/edit/{= this.id }">
+      <td>{= this.fullName}</td>
+      <td>{= this.email}</td>
+      <td class="text-center">{? this.isAdmin}✓{/? this.isAdmin}</td>
+    </tr>
+    {/@ users}
+  </table>
+</div>

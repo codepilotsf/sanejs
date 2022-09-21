@@ -1,0 +1,12 @@
+<script server>
+  // GET /admin
+  server.get('/', async (req, res) => {
+    res.redirect('admin/users')
+  })
+
+  // GET /admin/logout
+  server.get('/logout', async (req, res) => {
+    req.session.destroy()
+    res.redirect('/admin/login')
+  })
+</script>

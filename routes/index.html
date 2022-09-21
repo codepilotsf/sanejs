@@ -1,0 +1,39 @@
+---
+title: SaneJS - Home
+---
+
+<script server>
+  const fetch = require('node-fetch')
+  server.get('/', async (req, res) => {
+    const apiRes = await fetch(`http://ip-api.com/json`)
+    const apiJson = await apiRes.json()
+    res.render(self, { state: apiJson.regionName })
+  })
+</script>
+
+<div class="page">
+  <p class="text-5xl text-brand-1">Welcome, <strong>{= state }</strong> web devs!</p>
+
+  <h4>Check it out 🧐</h4>
+  <ol>
+    <li>
+      Edit <code>routes/_layout.html</code> and <code>routes/index.html</code> to change this page.
+    </li>
+    <li>
+      Look at the <code>&lt;script server&gt;</code> block at the top of
+      <code>routes/index.html</code> to see how we guessed your region.
+    </li>
+  </ol>
+
+  <h4>Insert an Admin user</h4>
+  <ol>
+    <li>
+      Edit <code>.env</code> and follow instructions to add a session key and MongoDB connection.
+    </li>
+    <li>Run <code>npm run insert-admin</code> to create a new admin.</li>
+    <li>Log into <a href="/admin" hx-boost="false">/admin</a>.</li>
+  </ol>
+
+  <h4>Read the docs!</h4>
+  <a href="https://www.sanejs.dev/docs">https://www.sanejs.dev/docs</a>
+</div>

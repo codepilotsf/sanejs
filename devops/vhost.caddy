@@ -1,0 +1,42 @@
+# Put this in the top level of your website, then add to Caddyfile
+# import /home/example/vhost.caddy
+# then `caddy reload`
+
+# Main
+www.example.com {
+	root * /home/example/main
+	encode zstd gzip
+	route {
+		# Proxy to node app
+		reverse_proxy * localhost:5013
+	}
+	log {
+		output file ./example/log/example.com.log {
+			roll_size 1mb
+			roll_keep 4
+			roll_keep_for 24h
+			format single_field common_log
+		}
+	}
+}
+example.com {
+	redir https://www.example.com{uri}
+}
+
+# Staging
+staging.example.com {
+	root * /home/example/staging
+	encode zstd gzip
+	route {
+		# Proxy to node app
+		reverse_proxy * localhost:4013
+	}
+	log {
+		output file ./example/log/staging.example.com.log {
+			roll_size 1mb
+			roll_keep 4
+			roll_keep_for 24h
+			format single_field common_log
+		}
+	}
+}

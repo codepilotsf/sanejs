@@ -1,0 +1,89 @@
+---
+title: Admin Login
+---
+
+{ nolayout }
+
+<script server>
+  const User = require('~/models/User')
+
+  // GET /admin/login
+  server.get('/', async (req, res) => {
+    const isReady = require('mongoose').connection.readyState
+    if (!isReady)
+      console.log('\x1b[31m\n *** No MongoDB connection – Please edit .env MONGO_URI\x1b[0m')
+    res.render(self)
+  })
+
+  // POST /admin/login
+  server.post('/', async (req, res) => {
+    const user = await User.findOne({ email: req.body.email })
+    // Validate the password.
+    const isValidUser = await user?.checkPassword(req.body.password)
+    if (!isValidUser || !user.isAdmin) {
+      res.render('admin/login', { form: req.body, authFailed: true })
+      return
+    }
+    // Log in valid user.
+    req.session.user = user
+    res.redirect('/admin/users')
+  })
+</script>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {> _/html-head }
+    <style>
+      h2,
+      label {
+        color: var(--light-3);
+      }
+      h2 {
+        margin-top: 0;
+        margin-bottom: 2rem;
+      }
+      .login-page {
+        height: 100%;
+        background: var(--dark-2);
+      }
+      form {
+        width: 24rem;
+        background-color: var(--dark-1);
+        padding: 3rem;
+        border-radius: 0.5rem;
+        box-shadow: 1px 3px 2rem var(--dark-1);
+      }
+      button {
+        width: 100%;
+        background-color: var(--brand-1);
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body hx-boost="true" hx-swap="outerHTML">
+    <div class="login-page fade-in flex items-center justify-center">
+      <form hx-post="/admin/login" hx-select="form">
+        <h2>Admin</h2>
+        <label>
+          Email
+          <input type="email" name="email" value="{= form.email }" required />
+          <span class="form-error">Please enter a valid email address</span>
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" value="{= form.password }" required />
+          <span class="form-error">Password required</span>
+        </label>
+        {? authFailed }
+        <span class="text-error">Authentication failed</span>
+        {/? authFailed }
+
+        <button>Log in</button>
+      </form>
+      <script>
+        autovalid()
+      </script>
+    </div>
+  </body>
+</html>

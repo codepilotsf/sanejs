@@ -1,0 +1,30 @@
+const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
+const { logger } = require('./logger')
+require('dotenv').config()
+
+module.exports = function connectToMongo() {
+  if (!process.env.MONGO_URI) {
+    return
+  }
+  mongoose.connect(process.env.MONGO_URI)
+  mongoose.connection.on('error', (err) => {
+    logger.error('** Unable to connect to MongoDB. Check MONGO_URI in .env **')
+  })
+
+  // Housekeeping: If the Node process ends, close the Mongoose connection.
+  process.on('SIGINT', function () {
+    mongoose.connection.close(() => {
+      process.exit()
+    })
+  })
+
+  // Set pagination default limit and make meta data return as a separate object.
+  mongoosePaginate.paginate.options = {
+    limit: 50,
+    customLabels: {
+      docs: 'data',
+      meta: 'meta'
+    }
+  }
+}

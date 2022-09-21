@@ -1,0 +1,23 @@
+---
+title: Admin - Users: New
+activeNav: users
+---
+
+<script server>
+  const User = require('~/models/User')
+
+  // POST /users/new
+  server.post('/', async (req, res) => {
+    const user = await new User(req.body)
+    // Add 'admin' role?
+    if (req.body.isAdmin) user.roles.push('admin')
+    const saved = await user.save()
+    if (!saved) return res.error500()
+    res.redirect('admin/users')
+  })
+</script>
+
+<div class="page">
+  <h2><a href="/admin/users">Users</a>: New</h2>
+  <form hx-post="/admin/users/new">{> admin/users/_user-form }</form>
+</div>

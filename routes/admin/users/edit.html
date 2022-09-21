@@ -1,0 +1,45 @@
+---
+title: Admin - Users: Edit
+activeNav: users
+isEdit: true
+---
+
+<script server>
+  const User = require('~/models/User')
+
+  // GET /users/edit/:id
+  server.get('/:id', async (req, res) => {
+    const user = await User.findById(req.params.id)
+    if (!user) res.error404()
+    res.render(self, { user }, 'page')
+  })
+
+  // PATCH /users/edit/:id
+  server.patch('/:id', async (req, res) => {
+    // Update user
+    const user = await User.findById(req.params.id)
+    for (let field of ['firstName', 'lastName', 'email', 'password']) {
+      if (req.body[field]) user[field] = req.body[field]
+    }
+    // Add 'admin' role?
+    if (req.body.isAdmin && !user.roles.includes('admin')) user.roles.push('admin')
+    // Remove 'admin' role?
+    if (!req.body.isAdmin && user.roles.includes('admin'))
+      user.roles = user.roles.filter((r) => r != 'admin')
+    const saved = await user.save()
+    if (!saved) return res.error500()
+    res.redirect('admin/users')
+  })
+
+  // DELETE /users/edit/:id
+  server.delete('/:id', async (req, res) => {
+    const user = await User.findByIdAndDelete(req.params.id)
+    if (!user) return res.error500()
+    res.redirect('admin/users')
+  })
+</script>
+
+<div id="page" class="page">
+  <h2><a href="/admin/users" hx-swap="none">Users</a>: Edit</h2>
+  <form hx-patch="/admin/users/edit/{= user.id }">{> admin/users/_user-form }</form>
+</div>

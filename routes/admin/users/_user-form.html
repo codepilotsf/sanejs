@@ -1,0 +1,57 @@
+<fieldset class="inline">
+  <label>
+    <span>First Name</span>
+    <input type="text" name="firstName" value="{= user.firstName }" required />
+    <span class="form-error">Please enter a first name.</span>
+  </label>
+
+  <label>
+    <span>Last Name</span>
+    <input type="text" name="lastName" value="{= user.lastName }" required />
+    <span class="form-error">Please enter a last name.</span>
+  </label>
+</fieldset>
+
+<label>
+  <span>Email</span>
+  <input type="email" name="email" value="{= user.email }" required />
+  <span class="form-error">Please enter a valid email address.</span>
+</label>
+
+<label>
+  <span>Password</span>
+  {? isNew }
+  <input type="password" name="password" required minlength="6" />
+  <span class="form-error">Please enter a password with minimum 6 characters</span>
+  {: isNew }
+  <input type="password" name="password" placeholder="**************" />
+  <span class="form-note">Leave blank for unchanged</span>
+  {/? isNew }
+</label>
+
+<fieldset style="margin-top: 1.5rem" class="checkboxes">
+  <label>
+    {? user.isAdmin }
+    <input type="checkbox" name="isAdmin" checked />
+    {: user.isAdmin }
+    <input type="checkbox" name="isAdmin" />
+    {/? user.isAdmin }
+    <span>Admin</span>
+  </label>
+</fieldset>
+
+<div class="flex items-center mt-12">
+  {? isEdit }
+  <a
+    class="inline-block text-dark-3 hover:text-error cursor-pointer no-underline"
+    hx-delete="/admin/users/edit/{= user.id }"
+  >
+    Delete
+  </a>
+  {/? isEdit }
+  <button class="ml-auto">Submit</button>
+</div>
+
+<script>
+  autovalid()
+</script>
